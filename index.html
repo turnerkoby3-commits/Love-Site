@@ -20,9 +20,15 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
       padding: 20px;
     }
-    img {
+    #slideshow, #ending-slide {
       width: 100%;
       border-radius: 10px;
+    }
+    #ending-slide {
+      font-size: 24px;
+      color: #b30059;
+      padding: 20px 10px 10px;
+      display: none;
     }
     button {
       background: #ff4d88;
@@ -55,6 +61,12 @@
       margin-top: 10px;
       height: 20px;
     }
+    #youtube-container {
+      margin-top: 20px;
+    }
+    iframe {
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
@@ -72,6 +84,17 @@
   <div id="slideshow-container">
     <h2>Our Memories 📸</h2>
     <img id="slideshow" src="photo1.png" alt="Slideshow photo" />
+    <div id="ending-slide">
+      <p>I love you baby ❤️<br>Happy Anniversary!</p>
+      <div id="youtube-container">
+        <iframe id="youtube-player" width="320" height="180"
+          src="https://www.youtube.com/embed/1lrFsXkT_rM?autoplay=1&mute=0"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
     <br />
     <button onclick="prevPhoto()">⬅️ Previous</button>
     <button onclick="nextPhoto()">Next ➡️</button>
@@ -108,18 +131,42 @@
   ];
 
   let index = 0;
+  let showingEnding = false;
 
   function showPhoto() {
-    document.getElementById("slideshow").src = photos[index];
+    if(showingEnding) {
+      document.getElementById("slideshow").style.display = "none";
+      document.getElementById("ending-slide").style.display = "block";
+    } else {
+      document.getElementById("slideshow").style.display = "block";
+      document.getElementById("ending-slide").style.display = "none";
+      document.getElementById("slideshow").src = photos[index];
+    }
   }
 
   function nextPhoto() {
-    index = (index + 1) % photos.length;
+    if(showingEnding) {
+      index = 0;
+      showingEnding = false;
+    } else {
+      index++;
+      if(index >= photos.length) {
+        showingEnding = true;
+      }
+    }
     showPhoto();
   }
 
   function prevPhoto() {
-    index = (index - 1 + photos.length) % photos.length;
+    if(showingEnding) {
+      showingEnding = false;
+      index = photos.length - 1;
+    } else {
+      index--;
+      if(index < 0) {
+        showingEnding = true;
+      }
+    }
     showPhoto();
   }
 
@@ -129,8 +176,14 @@
     if(input === correctPassword) {
       document.getElementById("password-section").style.display = "none";
       document.getElementById("slideshow-container").style.display = "block";
+      index = 0;
+      showingEnding = false;
       showPhoto();
       error.textContent = "";
+      // Reload iframe with autoplay on entering password
+      const iframe = document.getElementById("youtube-player");
+      // To reset iframe src and trigger autoplay
+      iframe.src = iframe.src;
     } else {
       error.textContent = "Wrong password, try again!";
     }
