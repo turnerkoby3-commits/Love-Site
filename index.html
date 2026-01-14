@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For My Girl ❤️</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #ffb6c1, #ffe4e1);
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #b30059;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 20px auto;
+      max-width: 500px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    button {
+      background: #ff4d88;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e6005c;
+    }
+
+    img, video {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Hi My Love 💕</h1>
+
+  <div class="card">
+    <p>This website is just for you.</p>
+    <button onclick="showMessage()">Click me</button>
+    <p id="message"></p>
+  </div>
+
+  <div class="card">
+    <h2>Our Memories 📸</h2>
+    <img src="photo1.jpg" alt="Us together">
+    <img src="photo2.jpg" alt="Another memory">
+  </div>
+
+  <div class="card">
+    <h2>Our Video 🎥</h2>
+    <video controls>
+      <source src="video1.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    function showMessage() {
+      document.getElementById("message").innerText =
+        "I love you more than words can explain ❤️";
+    }
+  </script>
+
+</body>
+</html>
