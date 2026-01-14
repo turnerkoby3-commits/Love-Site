@@ -63,9 +63,25 @@
     }
     #youtube-container {
       margin-top: 20px;
+      display: none;
+      position: relative;
     }
     iframe {
       border-radius: 10px;
+    }
+    #music-toggle {
+      margin-top: 10px;
+      background: #ff4d88;
+      border-radius: 20px;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #music-toggle:hover {
+      background: #e6005c;
     }
   </style>
 </head>
@@ -88,11 +104,13 @@
       <p>I love you baby ❤️<br>Happy Anniversary!</p>
       <div id="youtube-container">
         <iframe id="youtube-player" width="320" height="180"
-          src="https://www.youtube.com/embed/1lrFsXkT_rM?autoplay=1&mute=0"
+          src=""
           frameborder="0"
           allow="autoplay; encrypted-media"
           allowfullscreen>
         </iframe>
+        <br />
+        <button id="music-toggle" onclick="toggleMusic()">▶️ Play Music</button>
       </div>
     </div>
     <br />
@@ -112,83 +130,4 @@
     "photo6.png",
     "photo7.png",
     "photo8.png",
-    "photo9.png",
-    "photo10.png",
-    "photo11.png",
-    "photo12.png",
-    "photo13.png",
-    "photo14.png",
-    "photo15.png",
-    "photo16.png",
-    "photo17.png",
-    "photo18.png",
-    "photo19.png",
-    "photo20.png",
-    "photo21.png",
-    "photo22.png",
-    "photo23.png",
-    "photo24.png"
-  ];
-
-  let index = 0;
-  let showingEnding = false;
-
-  function showPhoto() {
-    if(showingEnding) {
-      document.getElementById("slideshow").style.display = "none";
-      document.getElementById("ending-slide").style.display = "block";
-    } else {
-      document.getElementById("slideshow").style.display = "block";
-      document.getElementById("ending-slide").style.display = "none";
-      document.getElementById("slideshow").src = photos[index];
-    }
-  }
-
-  function nextPhoto() {
-    if(showingEnding) {
-      index = 0;
-      showingEnding = false;
-    } else {
-      index++;
-      if(index >= photos.length) {
-        showingEnding = true;
-      }
-    }
-    showPhoto();
-  }
-
-  function prevPhoto() {
-    if(showingEnding) {
-      showingEnding = false;
-      index = photos.length - 1;
-    } else {
-      index--;
-      if(index < 0) {
-        showingEnding = true;
-      }
-    }
-    showPhoto();
-  }
-
-  function checkPassword() {
-    const input = document.getElementById("password-input").value.trim();
-    const error = document.getElementById("error-message");
-    if(input === correctPassword) {
-      document.getElementById("password-section").style.display = "none";
-      document.getElementById("slideshow-container").style.display = "block";
-      index = 0;
-      showingEnding = false;
-      showPhoto();
-      error.textContent = "";
-      // Reload iframe with autoplay on entering password
-      const iframe = document.getElementById("youtube-player");
-      // To reset iframe src and trigger autoplay
-      iframe.src = iframe.src;
-    } else {
-      error.textContent = "Wrong password, try again!";
-    }
-  }
-</script>
-
-</body>
-</html>
+    "photo9.png"
