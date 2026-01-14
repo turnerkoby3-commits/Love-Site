@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For My Girl ❤️</title>
+  <meta charset="UTF-8" />
+  <title>For My Love ❤️</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(to bottom right, #ffb6c1, #ffe4e1);
       text-align: center;
+      padding: 20px;
       margin: 0;
-      padding: 20px;
     }
-
-    h1 {
-      color: #b30059;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      margin: 20px auto;
+    #slideshow-container {
+      display: none;
       max-width: 500px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      padding: 20px;
     }
-
+    img {
+      width: 100%;
+      border-radius: 10px;
+    }
     button {
       background: #ff4d88;
       color: white;
@@ -33,48 +32,110 @@
       border-radius: 20px;
       font-size: 16px;
       cursor: pointer;
+      margin: 10px 5px;
+      transition: background 0.3s;
     }
-
     button:hover {
       background: #e6005c;
     }
-
-    img, video {
-      width: 100%;
+    #password-section {
+      margin-top: 100px;
+    }
+    input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
       border-radius: 10px;
+      border: 2px solid #ff4d88;
+      outline: none;
+      width: 200px;
+      text-align: center;
+    }
+    #error-message {
+      color: red;
       margin-top: 10px;
+      height: 20px;
     }
   </style>
 </head>
 <body>
 
-  <h1>Hi My Love 💕</h1>
+  <h1>Welcome, My Love 💖</h1>
 
-  <div class="card">
-    <p>This website is just for you.</p>
-    <button onclick="showMessage()">Click me</button>
-    <p id="message"></p>
+  <div id="password-section">
+    <p>Please enter the password to see our memories:</p>
+    <input type="password" id="password-input" placeholder="Enter password" />
+    <br />
+    <button onclick="checkPassword()">Enter</button>
+    <p id="error-message"></p>
   </div>
 
-  <div class="card">
+  <div id="slideshow-container">
     <h2>Our Memories 📸</h2>
-    <img src="photo1.jpg" alt="Us together">
-    <img src="photo2.jpg" alt="Another memory">
+    <img id="slideshow" src="photo1.png" alt="Slideshow photo" />
+    <br />
+    <button onclick="prevPhoto()">⬅️ Previous</button>
+    <button onclick="nextPhoto()">Next ➡️</button>
   </div>
 
-  <div class="card">
-    <h2>Our Video 🎥</h2>
-    <video controls>
-      <source src="video1.mp4" type="video/mp4">
-    </video>
-  </div>
+<script>
+  const correctPassword = "mwah";  // Change this password as you like
 
-  <script>
-    function showMessage() {
-      document.getElementById("message").innerText =
-        "I love you more than words can explain ❤️";
+  const photos = [
+    "photo1.png",
+    "photo2.png",
+    "photo3.png",
+    "photo4.png",
+    "photo5.png",
+    "photo6.png",
+    "photo7.png",
+    "photo8.png",
+    "photo9.png",
+    "photo10.png",
+    "photo11.png",
+    "photo12.png",
+    "photo13.png",
+    "photo14.png",
+    "photo15.png",
+    "photo16.png",
+    "photo17.png",
+    "photo18.png",
+    "photo19.png",
+    "photo20.png",
+    "photo21.png",
+    "photo22.png",
+    "photo23.png",
+    "photo24.png"
+  ];
+
+  let index = 0;
+
+  function showPhoto() {
+    document.getElementById("slideshow").src = photos[index];
+  }
+
+  function nextPhoto() {
+    index = (index + 1) % photos.length;
+    showPhoto();
+  }
+
+  function prevPhoto() {
+    index = (index - 1 + photos.length) % photos.length;
+    showPhoto();
+  }
+
+  function checkPassword() {
+    const input = document.getElementById("password-input").value.trim();
+    const error = document.getElementById("error-message");
+    if(input === correctPassword) {
+      document.getElementById("password-section").style.display = "none";
+      document.getElementById("slideshow-container").style.display = "block";
+      showPhoto();
+      error.textContent = "";
+    } else {
+      error.textContent = "Wrong password, try again!";
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
