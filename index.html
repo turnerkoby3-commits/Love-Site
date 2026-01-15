@@ -69,108 +69,117 @@
       margin-top: 10px;
       height: 20px;
     }
-
-    iframe {
-      display: none;
-    }
   </style>
 </head>
 
 <body>
 
-<h1>Welcome, My Love 💖</h1>
+  <h1>Welcome, My Love 💖</h1>
 
-<div id="password-section">
-  <p>Please enter the password to see our memories:</p>
-  <input type="password" id="password-input" placeholder="Enter password" />
-  <br><br>
-  <button onclick="checkPassword()">Enter</button>
-  <p id="error-message"></p>
-</div>
-
-<div id="slideshow-container">
-  <h2>Our Memories 📸</h2>
-
-  <img id="slideshow" src="photo1.png">
-
-  <div id="ending-slide">
-    💕 Happy Anniversary baby,<br>
-    I love you ❤️
+  <div id="password-section">
+    <p>Please enter the password to see our memories:</p>
+    <input type="password" id="password-input" placeholder="Enter password" />
+    <br><br>
+    <button onclick="checkPassword()">Enter</button>
+    <p id="error-message"></p>
   </div>
 
-  <br>
-  <button onclick="prevPhoto()">⬅️ Previous</button>
-  <button onclick="nextPhoto()">Next ➡️</button>
-</div>
+  <div id="slideshow-container">
+    <h2>Our Memories 📸</h2>
 
-<!-- MUSIC -->
-<iframe id="music" width="0" height="0"></iframe>
+    <img id="slideshow" src="photo1.png" alt="Memory" />
 
-<script>
-  const correctPassword = "mwah";
+    <div id="ending-slide">
+      💕 Happy Anniversary baby,<br>
+      I love you ❤️
+    </div>
 
-  const photos = [
-    "photo1.png","photo2.png","photo3.png","photo4.png","photo5.png","photo6.png",
-    "photo7.png","photo8.png","photo9.png","photo10.png","photo11.png","photo12.png",
-    "photo13.png","photo14.png","photo15.png","photo16.png","photo17.png","photo18.png",
-    "photo19.png","photo20.png","photo21.png","photo22.png","photo23.png","photo24.png"
-  ];
+    <br />
+    <button onclick="prevPhoto()">⬅️ Previous</button>
+    <button onclick="nextPhoto()">Next ➡️</button>
+  </div>
 
-  let currentIndex = 0;
+  <!-- Audio: make sure "Sailor Song - Gigi Perez.mp3" is in the same folder -->
+  <audio id="music" src="Sailor Song - Gigi Perez.mp3" loop></audio>
 
-  function checkPassword() {
-    const input = document.getElementById("password-input").value;
-    const error = document.getElementById("error-message");
+  <script>
+    const correctPassword = "mwah";
 
-    if (input === correctPassword) {
-      document.getElementById("password-section").style.display = "none";
-      document.getElementById("slideshow-container").style.display = "block";
+    const photos = [
+      "photo1.png",
+      "photo2.png",
+      "photo3.png",
+      "photo4.png",
+      "photo5.png",
+      "photo6.png",
+      "photo7.png",
+      "photo8.png",
+      "photo9.png",
+      "photo10.png",
+      "photo11.png",
+      "photo12.png",
+      "photo13.png",
+      "photo14.png",
+      "photo15.png",
+      "photo16.png",
+      "photo17.png",
+      "photo18.png",
+      "photo19.png",
+      "photo20.png",
+      "photo21.png",
+      "photo22.png",
+      "photo23.png",
+      "photo24.png"
+    ];
 
-      // AUTOPLAY MUTED FIRST (BROWSER SAFE)
-      const music = document.getElementById("music");
-      music.src =
-        "https://www.youtube.com/embed/ZwH6zJkWeNw?autoplay=1&mute=1&loop=1&playlist=ZwH6zJkWeNw";
+    let currentIndex = 0;
 
-      // UNMUTE AFTER LOAD
-      setTimeout(() => {
-        music.src =
-          "https://www.youtube.com/embed/ZwH6zJkWeNw?autoplay=1&loop=1&playlist=ZwH6zJkWeNw";
-      }, 1000);
+    function checkPassword() {
+      const input = document.getElementById("password-input").value.trim();
+      const error = document.getElementById("error-message");
 
-      showPhoto();
-    } else {
-      error.textContent = "Wrong password 💔 Try again.";
+      if (input === correctPassword) {
+        document.getElementById("password-section").style.display = "none";
+        document.getElementById("slideshow-container").style.display = "block";
+
+        const music = document.getElementById("music");
+        music.play().catch(() => {
+          console.log("Autoplay blocked, user may need to press play.");
+        });
+
+        showPhoto();
+      } else {
+        error.textContent = "Wrong password 💔 Try again.";
+      }
     }
-  }
 
-  function showPhoto() {
-    const img = document.getElementById("slideshow");
-    const ending = document.getElementById("ending-slide");
+    function showPhoto() {
+      const img = document.getElementById("slideshow");
+      const ending = document.getElementById("ending-slide");
 
-    if (currentIndex < photos.length) {
-      img.src = photos[currentIndex];
-      img.style.display = "block";
-      ending.style.display = "none";
-    } else {
-      img.style.display = "none";
-      ending.style.display = "block";
+      if (currentIndex < photos.length) {
+        img.src = photos[currentIndex];
+        img.style.display = "block";
+        ending.style.display = "none";
+      } else {
+        img.style.display = "none";
+        ending.style.display = "block";
+      }
     }
-  }
 
-  function nextPhoto() {
-    if (currentIndex <= photos.length) {
-      currentIndex++;
-      showPhoto();
+    function nextPhoto() {
+      if (currentIndex <= photos.length) {
+        currentIndex++;
+        showPhoto();
+      }
     }
-  }
 
-  function prevPhoto() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      showPhoto();
+    function prevPhoto() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        showPhoto();
+      }
     }
-  }
-</script>
-
+  </script>
 </body>
 </html>
