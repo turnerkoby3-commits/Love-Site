@@ -105,97 +105,74 @@
     <button onclick="nextPhoto()">Next ➡️</button>
   </div>
 
-  <!-- MUSIC (AUTOPLAYS AFTER PASSWORD) -->
+  <!-- MUSIC -->
   <iframe
     id="music"
     width="0"
     height="0"
-    src=""
     allow="autoplay">
   </iframe>
 
-<script>
-  const correctPassword = "mwah";
+  <script>
+    const correctPassword = "mwah";
 
-  const photos = [
-    "photo1.png",
-    "photo2.png",
-    "photo3.png",
-    "photo4.png",
-    "photo5.png",
-    "photo6.png",
-    "photo7.png",
-    "photo8.png",
-    "photo9.png",
-    "photo10.png",
-    "photo11.png",
-    "photo12.png",
-    "photo13.png",
-    "photo14.png",
-    "photo15.png",
-    "photo16.png",
-    "photo17.png",
-    "photo18.png",
-    "photo19.png",
-    "photo20.png",
-    "photo21.png",
-    "photo22.png",
-    "photo23.png",
-    "photo24.png"
-  ];
+    const photos = [
+      "photo1.png","photo2.png","photo3.png","photo4.png",
+      "photo5.png","photo6.png","photo7.png","photo8.png",
+      "photo9.png","photo10.png","photo11.png","photo12.png",
+      "photo13.png","photo14.png","photo15.png","photo16.png",
+      "photo17.png","photo18.png","photo19.png","photo20.png",
+      "photo21.png","photo22.png","photo23.png","photo24.png"
+    ];
 
-  let currentIndex = 0;
+    let currentIndex = 0;
 
-  /* rest of your script stays exactly the same */
-</script>
+    function checkPassword() {
+      const input = document.getElementById("password-input").value;
+      const error = document.getElementById("error-message");
 
+      if (input === correctPassword) {
+        document.getElementById("password-section").style.display = "none";
+        document.getElementById("slideshow-container").style.display = "block";
 
-  function checkPassword() {
-    const input = document.getElementById("password-input").value;
-    const error = document.getElementById("error-message");
+        document.getElementById("music").src =
+          "https://www.youtube.com/embed/ZwH6zJkWeNw?autoplay=1&loop=1&playlist=ZwH6zJkWeNw";
 
-    if (input === correctPassword) {
-      document.getElementById("password-section").style.display = "none";
-      document.getElementById("slideshow-container").style.display = "block";
-
-      // AUTOPLAY SAILOR SONG
-      document.getElementById("music").src =
-        "https://www.youtube.com/embed/ZwH6zJkWeNw?autoplay=1&loop=1&playlist=ZwH6zJkWeNw";
-
-      showPhoto();
-    } else {
-      error.textContent = "Wrong password 💔 Try again.";
+        showPhoto();
+      } else {
+        error.textContent = "Wrong password 💔 Try again.";
+      }
     }
-  }
 
-  function showPhoto() {
-    const img = document.getElementById("slideshow");
-    const ending = document.getElementById("ending-slide");
+    function showPhoto() {
+      const img = document.getElementById("slideshow");
+      const ending = document.getElementById("ending-slide");
 
-    if (currentIndex < photos.length) {
-      img.src = photos[currentIndex];
-      img.style.display = "block";
-      ending.style.display = "none";
-    } else {
-      img.style.display = "none";
-      ending.style.display = "block";
+      if (currentIndex < photos.length) {
+        img.src = photos[currentIndex];
+        img.style.display = "block";
+        ending.style.display = "none";
+      } else {
+        img.style.display = "none";
+        ending.style.display = "block";
+      }
     }
-  }
 
-  function nextPhoto() {
-    if (currentIndex <= photos.length) {
-      currentIndex++;
-      showPhoto();
+    function nextPhoto() {
+      if (currentIndex <= photos.length) {
+        currentIndex++;
+        showPhoto();
+      }
     }
-  }
 
-  function prevPhoto() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      showPhoto();
+    function prevPhoto() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        showPhoto();
+      }
     }
-  }
-</script>
+  </script>
 
 </body>
 </html>
+
