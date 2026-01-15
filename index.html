@@ -78,70 +78,42 @@
 
 <body>
 
-  <h1>Welcome, My Love 💖</h1>
+<h1>Welcome, My Love 💖</h1>
 
-  <!-- PASSWORD SECTION -->
-  <div id="password-section">
-    <p>Please enter the password to see our memories:</p>
-    <input type="password" id="password-input" placeholder="Enter password" />
-    <br><br>
-    <button onclick="checkPassword()">Enter</button>
-    <p id="error-message"></p>
+<div id="password-section">
+  <p>Please enter the password to see our memories:</p>
+  <input type="password" id="password-input" placeholder="Enter password" />
+  <br><br>
+  <button onclick="checkPassword()">Enter</button>
+  <p id="error-message"></p>
+</div>
+
+<div id="slideshow-container">
+  <h2>Our Memories 📸</h2>
+
+  <img id="slideshow" src="photo1.png">
+
+  <div id="ending-slide">
+    💕 Happy Anniversary baby,<br>
+    I love you ❤️
   </div>
 
-  <!-- SLIDESHOW -->
-  <div id="slideshow-container">
-    <h2>Our Memories 📸</h2>
+  <br>
+  <button onclick="prevPhoto()">⬅️ Previous</button>
+  <button onclick="nextPhoto()">Next ➡️</button>
+</div>
 
-    <img id="slideshow" src="photo1.png" alt="Memory">
-
-    <div id="ending-slide">
-      💕 Happy Anniversary baby,<br>
-      I love you ❤️
-    </div>
-
-    <br>
-    <button onclick="prevPhoto()">⬅️ Previous</button>
-    <button onclick="nextPhoto()">Next ➡️</button>
-  </div>
-
-  <!-- MUSIC (AUTOPLAYS AFTER PASSWORD) -->
-  <iframe
-    id="music"
-    width="0"
-    height="0"
-    src=""
-    allow="autoplay">
-  </iframe>
+<!-- MUSIC -->
+<iframe id="music" width="0" height="0"></iframe>
 
 <script>
   const correctPassword = "mwah";
 
   const photos = [
-    "photo1.png",
-    "photo2.png",
-    "photo3.png",
-    "photo4.png",
-    "photo5.png",
-    "photo6.png",
-    "photo7.png",
-    "photo8.png",
-    "photo9.png",
-    "photo10.png",
-    "photo11.png",
-    "photo12.png",
-    "photo13.png",
-    "photo14.png",
-    "photo15.png",
-    "photo16.png",
-    "photo17.png",
-    "photo18.png",
-    "photo19.png",
-    "photo20.png",
-    "photo21.png",
-    "photo22.png",
-    "photo23.png",
-    "photo24.png"
+    "photo1.png","photo2.png","photo3.png","photo4.png","photo5.png","photo6.png",
+    "photo7.png","photo8.png","photo9.png","photo10.png","photo11.png","photo12.png",
+    "photo13.png","photo14.png","photo15.png","photo16.png","photo17.png","photo18.png",
+    "photo19.png","photo20.png","photo21.png","photo22.png","photo23.png","photo24.png"
   ];
 
   let currentIndex = 0;
@@ -154,9 +126,16 @@
       document.getElementById("password-section").style.display = "none";
       document.getElementById("slideshow-container").style.display = "block";
 
-      // AUTOPLAY "SAILOR SONG"
-      document.getElementById("music").src =
-        "https://www.youtube.com/embed/ZwH6zJkWeNw?autoplay=1&loop=1&playlist=ZwH6zJkWeNw";
+      // AUTOPLAY MUTED FIRST (BROWSER SAFE)
+      const music = document.getElementById("music");
+      music.src =
+        "https://www.youtube.com/embed/ZwH6zJkWeNw?autoplay=1&mute=1&loop=1&playlist=ZwH6zJkWeNw";
+
+      // UNMUTE AFTER LOAD
+      setTimeout(() => {
+        music.src =
+          "https://www.youtube.com/embed/ZwH6zJkWeNw?autoplay=1&loop=1&playlist=ZwH6zJkWeNw";
+      }, 1000);
 
       showPhoto();
     } else {
